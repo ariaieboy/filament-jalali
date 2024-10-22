@@ -4,7 +4,7 @@ namespace Filament\Forms\Components {
     class DatePicker
     {
         /**
-         * @source FilamentJalaliDatetimepickerServiceProvider.php:21
+         * @source FilamentJalaliServiceProvider.php:21
          */
         public function jalali(bool $weekdaysShort = false): self
         {
@@ -15,7 +15,7 @@ namespace Filament\Forms\Components {
     class DateTimePicker
     {
         /**
-         * @source FilamentJalaliDatetimepickerServiceProvider.php:25
+         * @source FilamentJalaliServiceProvider.php:25
          */
         public function jalali(bool $weekdaysShort = false): self
         {
@@ -27,7 +27,7 @@ namespace Filament\Tables\Columns {
     class TextColumn
     {
         /**
-         * @source packages/filament-jalali-datetime/src/FilamentJalaliDatetimeServiceProvider.php:28
+         * @source packages/filament-jalali/src/FilamentJalaliServiceProvider.php
          */
         public function jalaliDate(?string $format = null, ?string $timezone = null): self
         {
@@ -38,6 +38,39 @@ namespace Filament\Tables\Columns {
          * @source packages/filament-jalali-datetime/src/FilamentJalaliDatetimeServiceProvider.php:46
          */
         public function jalaliDateTime(?string $format = null, ?string $timezone = null): self
+        {
+            return $this;
+        }
+    }
+}
+namespace Filament\Infolists\Components{
+    class TextEntry
+    {
+        /**
+         * @source packages/filament-jalali-datetime/src/FilamentJalaliDatetimeServiceProvider.php:46
+         */
+        public function jalaliDate(?string $format = null, ?string $timezone = null): self
+        {
+            return $this;
+        }
+        /**
+         * @source packages/filament-jalali-datetime/src/FilamentJalaliDatetimeServiceProvider.php:46
+         */
+        public function jalaliDateTime(?string $format = null, ?string $timezone = null): self
+        {
+            return $this;
+        }
+        /**
+         * @source packages/filament-jalali-datetime/src/FilamentJalaliDatetimeServiceProvider.php:46
+         */
+        public function jalaliDateTooltip(?string $format = null, ?string $timezone = null): self
+        {
+            return $this;
+        }
+        /**
+         * @source packages/filament-jalali-datetime/src/FilamentJalaliDatetimeServiceProvider.php:46
+         */
+        public function jalaliDateTimeTooltip(?string $format = null, ?string $timezone = null): self
         {
             return $this;
         }

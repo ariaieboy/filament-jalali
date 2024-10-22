@@ -32,6 +32,8 @@ DateTimePicker::make('birth_date')->jalali(weekdaysShort: true);
 
 TextColumn::make('created_at')->jalaliDate();
 TextColumn::make('created_at')->jalaliDateTime();
+
+\Filament\Infolists\Components\TextEntry::make('created_at');
 ```
 
 for more information check the default DateTimePicker
