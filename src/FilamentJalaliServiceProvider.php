@@ -78,9 +78,28 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             });
             return $this;
         });
+        TextEntry::macro('jalaliDateTooltip',function (?string $format = null, ?string $timezone = null): static {
+            $format ??= config('filament-jalali.date_format');
+            $this->tooltip(static function (TextEntry $column, $state) use ($format, $timezone): ?string {
+                /** @var TextColumn $column */
+
+                if (blank($state)) {
+                    return null;
+                }
+
+                return Jalali::fromCarbon(Carbon::parse($state)
+                    ->setTimezone($timezone ?? $column->getTimezone()))
+                    ->format($format);
+            });
+            return $this;
+        });
         TextEntry::macro('jalaliDateTime',function (?string $format = null, ?string $timezone = null): static {
             $format ??= config('filament-jalali.date_time_format');
             return $this->jalaliDate($format, $timezone);
+        });
+        TextEntry::macro('jalaliDateTimeTooltip',function (?string $format = null, ?string $timezone = null): static {
+            $format ??= config('filament-jalali.date_time_format');
+            return $this->jalaliDateTooltip($format, $timezone);
         });
     }
 
