@@ -6,6 +6,7 @@ use Ariaieboy\Jalali\Jalali;
 use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Tables\Columns\Column;
@@ -60,9 +61,26 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         TextColumn::macro('jalaliDateTime', function (?string $format = null, ?string $timezone = null): static {
             $format ??= config('filament-jalali.date_time_format');
 
-            $this->jalaliDate($format, $timezone);
+            return $this->jalaliDate($format, $timezone);
+        });
+        TextEntry::macro('jalaliDate',function (?string $format = null, ?string $timezone = null): static {
+            $format ??= config('filament-jalali.date_format');
+            $this->formatStateUsing(static function (TextEntry $column, $state) use ($format, $timezone): ?string {
+                /** @var TextColumn $column */
 
+                if (blank($state)) {
+                    return null;
+                }
+
+                return Jalali::fromCarbon(Carbon::parse($state)
+                    ->setTimezone($timezone ?? $column->getTimezone()))
+                    ->format($format);
+            });
             return $this;
+        });
+        TextEntry::macro('jalaliDateTime',function (?string $format = null, ?string $timezone = null): static {
+            $format ??= config('filament-jalali.date_time_format');
+            return $this->jalaliDate($format, $timezone);
         });
     }
 
