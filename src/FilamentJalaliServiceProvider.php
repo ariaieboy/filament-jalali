@@ -1,6 +1,6 @@
 <?php
 
-namespace Ariaieboy\FilamentJalaliDatetimepicker;
+namespace Ariaieboy\FilamentJalali;
 
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
