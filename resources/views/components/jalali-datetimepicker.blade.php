@@ -35,7 +35,7 @@ $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
         <div
                 x-ignore
                 ax-load
-                ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('jalali-datetime-picker',package: "ariaieboy/jalali-datetime-picker") }}"
+                ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('jalali-datetime-picker',package: "ariaieboy/jalali") }}"
                 x-data="jalaliDateTimePickerFormComponent({
                             displayFormat:
                                 '{{ convert_date_format($getDisplayFormat())->to('day.js') }}',
