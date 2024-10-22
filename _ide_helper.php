@@ -2,7 +2,7 @@
 
 namespace Filament\Forms\Components {
 
-    use Ariaieboy\FilamentJalaliDatetimepicker\FilamentJalaliDatetimepickerServiceProvider;
+    use Ariaieboy\FilamentJalaliDatetimepicker\FilamentJalaliServiceProvider;
 
     class DatePicker
     {

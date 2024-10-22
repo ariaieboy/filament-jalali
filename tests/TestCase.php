@@ -2,6 +2,7 @@
 
 namespace Ariaieboy\FilamentJalali\Tests;
 
+use Ariaieboy\FilamentJalaliDatetimepicker\FilamentJalaliServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 

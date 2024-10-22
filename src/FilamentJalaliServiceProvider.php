@@ -9,7 +9,7 @@ use Filament\Support\Facades\FilamentAsset;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class FilamentJalaliDatetimepickerServiceProvider extends PackageServiceProvider
+class FilamentJalaliServiceProvider extends PackageServiceProvider
 {
     public function bootingPackage(): void
     {
