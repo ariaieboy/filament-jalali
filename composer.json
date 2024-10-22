@@ -1,17 +1,20 @@
 {
-    "name": "ariaieboy/filament-jalali-datetimepicker",
-    "description": "This is my package filament-jalali-datetimepicker",
+    "name": "ariaieboy/filament-jalali",
+    "description": "Add Jalali/Shamsi support for FilamentPHP",
     "keywords": [
         "ariaieboy",
         "laravel",
-        "filament-jalali-datetimepicker"
+        "filament-jalali-datetimepicker",
+        "filament-jalali-support",
+        "filament-shamsi-calendar",
+        "filament-shamsi-support"
     ],
-    "homepage": "https://github.com/ariaieboy/filament-jalali-datetimepicker",
+    "homepage": "https://github.com/ariaieboy/filament-jalali",
     "license": "MIT",
     "authors": [
         {
             "name": "ariaieboy",
-            "email": "smr.seddighy@gmail.com",
+            "email": "ariaieboy.ir@gmail.com",
             "role": "Developer"
         }
     ],
@@ -19,7 +22,8 @@
         "php": "~8.2.0|~8.3|~8.4",
         "spatie/laravel-package-tools": "^1.13.5",
         "illuminate/contracts": "^11",
-        "filament/filament": "^3"
+        "filament/filament": "^3",
+        "ariaieboy/jalali": "^1.0.1"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.11",
@@ -35,12 +39,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Ariaieboy\\FilamentJalaliDatetimepicker\\": "src"
+            "Ariaieboy\\FilamentJalali\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ariaieboy\\FilamentJalaliDatetimepicker\\Tests\\": "tests"
+            "Ariaieboy\\FilamentJalali\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -59,11 +63,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Ariaieboy\\FilamentJalaliDatetimepicker\\FilamentJalaliDatetimepickerServiceProvider"
-            ],
-            "aliases": {
-                "FilamentJalaliDatetimepicker": "Ariaieboy\\FilamentJalaliDatetimepicker\\Facades\\FilamentJalaliDatetimepicker"
-            }
+                "Ariaieboy\\FilamentJalali\\FilamentJalaliServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
