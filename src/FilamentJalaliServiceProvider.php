@@ -6,6 +6,8 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Facades\FilamentAsset;
+use Filament\Tables\Columns\Column;
+use Filament\Tables\Columns\TextColumn;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
