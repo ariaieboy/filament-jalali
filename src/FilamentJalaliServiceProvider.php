@@ -24,9 +24,11 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
 {
     public function bootingPackage(): void
     {
+        // register datetime picker js component
         FilamentAsset::register([
             AlpineComponent::make('jalali-datetime-picker', __DIR__ . '/../resources/dist/js/jalali-date-time-picker.js'),
         ], package: "ariaieboy/jalali");
+        // date time picker macros
         DatePicker::macro('jalali', function (bool $weekdaysShort = false) {
             /** @var DatePicker $this */
             $this->view = "filament-jalali::components.jalali-datetimepicker";
@@ -46,6 +48,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
 
             return $this;
         });
+        // Text based Columns macros
         TextColumn::macro('jalaliDate', function (?string $format = null, ?string $timezone = null): static {
             $format ??= config('filament-jalali.date_format');
 
@@ -107,6 +110,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             $format ??= config('filament-jalali.date_time_format');
             return $this->jalaliDateTooltip($format, $timezone);
         });
+        // DateConstraint jalali macro
         DateConstraint::macro('jalali',function (){
             /**
              * @var DateConstraint $this
