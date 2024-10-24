@@ -2,6 +2,8 @@
 
 namespace Ariaieboy\FilamentJalali;
 
+use Ariaieboy\FilamentJalali\DateConstraint\Operators\IsJalaliAfterOperator;
+use Ariaieboy\FilamentJalali\DateConstraint\Operators\IsJalaliBeforeOperator;
 use Ariaieboy\Jalali\Jalali;
 use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
@@ -11,6 +13,7 @@ use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\QueryBuilder\Constraints\DateConstraint;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -100,6 +103,13 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         TextEntry::macro('jalaliDateTimeTooltip',function (?string $format = null, ?string $timezone = null): static {
             $format ??= config('filament-jalali.date_time_format');
             return $this->jalaliDateTooltip($format, $timezone);
+        });
+        DateConstraint::macro('jalali',function (){
+            $this->operators([
+                IsJalaliAfterOperator::class,
+                IsJalaliBeforeOperator::class
+            ]);
+            return $this;
         });
     }
 

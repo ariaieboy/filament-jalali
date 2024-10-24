@@ -26,14 +26,17 @@ composer require ariaieboy/filament-jalali
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
-
+use Filament\Infolists\Components\TextEntry;
 DatePicker::make('birth_date')->jalali();
 DateTimePicker::make('birth_date')->jalali(weekdaysShort: true);
 
 TextColumn::make('created_at')->jalaliDate();
 TextColumn::make('created_at')->jalaliDateTime();
 
-\Filament\Infolists\Components\TextEntry::make('created_at');
+TextEntry::make('created_at')->jalaliDate();
+TextEntry::make('created_at')->jalaliDateTime();
+TextEntry::make('created_at')->since()->jalaliDateTooltip();
+TextEntry::make('created_at')->since()->jalaliDateTimeTooltip();
 ```
 
 for more information check the default DateTimePicker
