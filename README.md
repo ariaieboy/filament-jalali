@@ -10,7 +10,7 @@ This package adds Jalali/Shamsi support to filament v3.
 We have Jalali/Shamsi support for `DatePicker`,`DateTimePicker`,`TextColumn`, `TextEntry` and `DateConstraint`.
 
 
-It's a replacement for [ariaieboy/filament-jalali-datetime](https://github.com/ariaieboy/jalali-filament-datetime) and [ariaieboy/filament-jalali-datetimepicker](https://github.com/ariaieboy/filament-jalali-datetimepicker).
+It's a replacement for [ariaieboy/filament-jalali-datetime](https://github.com/ariaieboy/filament-jalali-datetime) and [ariaieboy/filament-jalali-datetimepicker](https://github.com/ariaieboy/filament-jalali-datetimepicker).
 
 ## Installation
 
