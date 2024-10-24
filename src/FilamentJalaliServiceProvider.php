@@ -4,6 +4,7 @@ namespace Ariaieboy\FilamentJalali;
 
 use Ariaieboy\FilamentJalali\DateConstraint\Operators\IsJalaliAfterOperator;
 use Ariaieboy\FilamentJalali\DateConstraint\Operators\IsJalaliBeforeOperator;
+use Ariaieboy\FilamentJalali\DateConstraint\Operators\IsJalaliDateOperator;
 use Ariaieboy\Jalali\Jalali;
 use Carbon\Carbon;
 use Filament\Forms\Components\DatePicker;
@@ -107,7 +108,8 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         DateConstraint::macro('jalali',function (){
             $this->operators([
                 IsJalaliAfterOperator::class,
-                IsJalaliBeforeOperator::class
+                IsJalaliBeforeOperator::class,
+                IsJalaliDateOperator::class
             ]);
             return $this;
         });
