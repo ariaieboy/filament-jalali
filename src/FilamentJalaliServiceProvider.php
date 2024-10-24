@@ -26,12 +26,12 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
     {
         // register datetime picker js component
         FilamentAsset::register([
-            AlpineComponent::make('jalali-datetime-picker', __DIR__ . '/../resources/dist/js/jalali-date-time-picker.js'),
-        ], package: "ariaieboy/jalali");
+            AlpineComponent::make('jalali-datetime-picker', __DIR__.'/../resources/dist/js/jalali-date-time-picker.js'),
+        ], package: 'ariaieboy/jalali');
         // date time picker macros
         DatePicker::macro('jalali', function (bool $weekdaysShort = false) {
             /** @var DatePicker $this */
-            $this->view = "filament-jalali::components.jalali-datetimepicker";
+            $this->view = 'filament-jalali::components.jalali-datetimepicker';
             $this->extraAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true);
             $this->firstDayOfWeek(6);
             $this->displayFormat('Y/m/d');
@@ -40,8 +40,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         });
         DateTimePicker::macro('jalali', function (bool $weekdaysShort = false) {
             /** @var DateTimePicker $this */
-
-            $this->view = "filament-jalali::components.jalali-datetimepicker";
+            $this->view = 'filament-jalali::components.jalali-datetimepicker';
             $this->extraAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true);
             $this->firstDayOfWeek(6);
             $this->displayFormat('Y/m/d H:i:s');
@@ -54,7 +53,6 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
 
             $this->formatStateUsing(static function (Column $column, $state) use ($format, $timezone): ?string {
                 /** @var TextColumn $column */
-
                 if (blank($state)) {
                     return null;
                 }
@@ -72,11 +70,10 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
 
             return $this->jalaliDate($format, $timezone);
         });
-        TextEntry::macro('jalaliDate',function (?string $format = null, ?string $timezone = null): static {
+        TextEntry::macro('jalaliDate', function (?string $format = null, ?string $timezone = null): static {
             $format ??= config('filament-jalali.date_format');
             $this->formatStateUsing(static function (TextEntry $column, $state) use ($format, $timezone): ?string {
                 /** @var TextColumn $column */
-
                 if (blank($state)) {
                     return null;
                 }
@@ -85,13 +82,13 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     ->setTimezone($timezone ?? $column->getTimezone()))
                     ->format($format);
             });
+
             return $this;
         });
-        TextEntry::macro('jalaliDateTooltip',function (?string $format = null, ?string $timezone = null): static {
+        TextEntry::macro('jalaliDateTooltip', function (?string $format = null, ?string $timezone = null): static {
             $format ??= config('filament-jalali.date_format');
             $this->tooltip(static function (TextEntry $column, $state) use ($format, $timezone): ?string {
                 /** @var TextColumn $column */
-
                 if (blank($state)) {
                     return null;
                 }
@@ -100,18 +97,21 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                     ->setTimezone($timezone ?? $column->getTimezone()))
                     ->format($format);
             });
+
             return $this;
         });
-        TextEntry::macro('jalaliDateTime',function (?string $format = null, ?string $timezone = null): static {
+        TextEntry::macro('jalaliDateTime', function (?string $format = null, ?string $timezone = null): static {
             $format ??= config('filament-jalali.date_time_format');
+
             return $this->jalaliDate($format, $timezone);
         });
-        TextEntry::macro('jalaliDateTimeTooltip',function (?string $format = null, ?string $timezone = null): static {
+        TextEntry::macro('jalaliDateTimeTooltip', function (?string $format = null, ?string $timezone = null): static {
             $format ??= config('filament-jalali.date_time_format');
+
             return $this->jalaliDateTooltip($format, $timezone);
         });
         // DateConstraint jalali macro
-        DateConstraint::macro('jalali',function (){
+        DateConstraint::macro('jalali', function () {
             /**
              * @var DateConstraint $this
              */
@@ -123,6 +123,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
                 IsFilledOperator::make()
                     ->visible(fn (): bool => $this->isNullable()),
             ]);
+
             return $this;
         });
     }
