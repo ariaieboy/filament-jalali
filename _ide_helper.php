@@ -76,3 +76,12 @@ namespace Filament\Infolists\Components{
         }
     }
 }
+namespace Filament\Tables\Filters\QueryBuilder\Constraints{
+    class DateConstraint
+    {
+        public function jalali(): self
+        {
+            return $this;
+        }
+    }
+}
