@@ -22,6 +22,7 @@ class IsJalaliBeforeOperator extends IsBeforeOperator
             ],
         );
     }
+
     /**
      * @return array<Component>
      */

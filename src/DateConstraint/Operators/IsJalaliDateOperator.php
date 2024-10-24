@@ -22,6 +22,7 @@ class IsJalaliDateOperator extends IsDateOperator
             ],
         );
     }
+
     /**
      * @return array<Component>
      */
@@ -35,9 +36,11 @@ class IsJalaliDateOperator extends IsDateOperator
                 ->required(),
         ];
     }
+
     public function apply(\Illuminate\Database\Eloquent\Builder $query, string $qualifiedColumn): \Illuminate\Database\Eloquent\Builder
     {
         $date = $this->getSettings()['date'];
+
         return $query->whereDate($qualifiedColumn, $this->isInverse() ? '!=' : '=', Carbon::parse($date)->format('Y-m-d'));
     }
 }
