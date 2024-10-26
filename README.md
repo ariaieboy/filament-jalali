@@ -11,6 +11,7 @@ We have Jalali/Shamsi support for `DatePicker`,`DateTimePicker`,`TextColumn`, `T
 
 
 It's a replacement for [ariaieboy/filament-jalali-datetime](https://github.com/ariaieboy/filament-jalali-datetime) and [ariaieboy/filament-jalali-datetimepicker](https://github.com/ariaieboy/filament-jalali-datetimepicker).
+For Upgaring guide check [here](README.md#upgrading)
 
 ## Installation
 
