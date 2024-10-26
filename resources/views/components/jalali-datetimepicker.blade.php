@@ -18,7 +18,11 @@ $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
 
 @endphp
 
-<x-dynamic-component :component="$getFieldWrapperView()" :field="$field">
+<x-dynamic-component
+        :component="$getFieldWrapperView()"
+        :field="$field"
+        :inline-label-vertical-alignment="\Filament\Support\Enums\VerticalAlignment::Center"
+>
     <x-filament::input.wrapper
             :disabled="$isDisabled"
             :inline-prefix="$isPrefixInline"
@@ -26,9 +30,11 @@ $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
             :prefix="$prefixLabel"
             :prefix-actions="$prefixActions"
             :prefix-icon="$prefixIcon"
+            :prefix-icon-color="$getPrefixIconColor()"
             :suffix="$suffixLabel"
             :suffix-actions="$suffixActions"
             :suffix-icon="$suffixIcon"
+            :suffix-icon-color="$getSuffixIconColor()"
             :valid="! $errors->has($statePath)"
             :attributes="\Filament\Support\prepare_inherited_attributes($getExtraAttributeBag())"
     >
@@ -108,8 +114,7 @@ $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
                         dir="ltr"
                         @if ($id = $getId()) id="{{ $id }}" @endif
                         @class([
-                            "w-full border-none bg-transparent px-3 py-1.5 text-base text-gray-950 outline-none transition duration-75 placeholder:text-gray-400 focus:ring-0 disabled:text-gray-500 disabled:[-webkit-text-fill-color:theme(colors.gray.500)] dark:text-white dark:placeholder:text-gray-500 dark:disabled:text-gray-400 dark:disabled:[-webkit-text-fill-color:theme(colors.gray.400)] sm:text-sm sm:leading-6",
-                            ((__('filament-panels::layout.direction')??'ltr')==='rtl')?'text-right':''
+                            'fi-fo-date-time-picker-display-text-input w-full border-none bg-transparent px-3 py-1.5 text-base text-gray-950 outline-none transition duration-75 placeholder:text-gray-400 focus:ring-0 disabled:text-gray-500 disabled:[-webkit-text-fill-color:theme(colors.gray.500)] dark:text-white dark:placeholder:text-gray-500 dark:disabled:text-gray-400 dark:disabled:[-webkit-text-fill-color:theme(colors.gray.400)] sm:text-sm sm:leading-6',
                         ])
                 />
             </button>
@@ -121,8 +126,8 @@ $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
                     wire:ignore
                     wire:key="{{ $this->getId() }}.{{ $statePath }}.{{ $field::class }}.panel"
                     @class([
-                        'absolute z-10 rounded-lg bg-white p-4 shadow-lg ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10',
-                    ])
+                       'fi-fo-date-time-picker-panel absolute z-10 rounded-lg bg-white p-4 shadow-lg ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10',
+                   ])
             >
                 <div class="grid gap-y-3">
                     @if ($hasDate())
@@ -191,12 +196,15 @@ $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
                                                 focusedDate.date() !== day &&
                                                 ! dayIsDisabled(day),
                                             'bg-gray-50 dark:bg-white/5':
-                                                focusedDate.date() === day && ! dayIsSelected(day),
+                                                focusedDate.date() === day &&
+                                                ! dayIsSelected(day) &&
+                                                ! dayIsDisabled(day),
                                             'text-primary-600 bg-gray-50 dark:bg-white/5 dark:text-primary-400':
                                                 dayIsSelected(day),
                                             'pointer-events-none': dayIsDisabled(day),
-                                            'opacity-50': focusedDate.date() !== day && dayIsDisabled(day),
+                                            'opacity-50': dayIsDisabled(day),
                                         }"
+
                                         class="rounded-full text-center text-sm leading-loose transition duration-75"
                                 ></div>
                             </template>
