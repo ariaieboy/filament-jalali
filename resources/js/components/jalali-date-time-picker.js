@@ -59,11 +59,11 @@ export default function jalaliDateTimePickerFormComponent({
 
         init: function () {
             dayjs.locale(locales[locale] ?? locales['en']);
-            this.focusedDate = dayjs().toCalendarSystem("persian").tz(timezone)
+            this.focusedDate = dayjs().tz(timezone).toCalendarSystem("persian")
 
             let date =
                 this.getSelectedDate() ??
-                dayjs().toCalendarSystem("persian").tz(timezone).hour(0).minute(0).second(0)
+                dayjs().tz(timezone).toCalendarSystem("persian").hour(0).minute(0).second(0)
 
             if (
                 this.getMaxDate() !== null &&
@@ -118,7 +118,7 @@ export default function jalaliDateTimePickerFormComponent({
                 let year = +this.focusedYear
 
                 if (!Number.isInteger(year)) {
-                    year = dayjs().tz(timezone).year()
+                    year = dayjs().tz(timezone).toCalendarSystem("persian").year()
 
                     this.focusedYear = year
                 }
@@ -133,7 +133,6 @@ export default function jalaliDateTimePickerFormComponent({
             this.$watch('focusedDate', () => {
                 let month = this.focusedDate.month()
                 let year = this.focusedDate.year()
-
                 if (this.focusedMonth !== month) {
                     this.focusedMonth = month
                 }
@@ -279,7 +278,7 @@ export default function jalaliDateTimePickerFormComponent({
                             return false
                         }
 
-                        return disabledDate.isSame(date, 'day')
+                        return disabledDate.isSame(date.toCalendarSystem("gregory"), 'day')
                     },
                 )
             ) {
@@ -297,7 +296,7 @@ export default function jalaliDateTimePickerFormComponent({
         },
 
         dayIsDisabled: function (day) {
-            this.focusedDate ??= dayjs().tz(timezone)
+            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
 
             return this.dateIsDisabled(this.focusedDate.date(day))
         },
@@ -309,7 +308,7 @@ export default function jalaliDateTimePickerFormComponent({
                 return false
             }
 
-            this.focusedDate ??= dayjs().tz(timezone)
+            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
 
             return (
                 selectedDate.date() === day &&
@@ -319,7 +318,7 @@ export default function jalaliDateTimePickerFormComponent({
         },
 
         dayIsToday: function (day) {
-            let date = dayjs().tz(timezone)
+            let date = dayjs().tz(timezone).toCalendarSystem("persian")
             this.focusedDate ??= date
 
             return (
@@ -330,25 +329,25 @@ export default function jalaliDateTimePickerFormComponent({
         },
 
         focusPreviousDay: function () {
-            this.focusedDate ??= dayjs().tz(timezone)
+            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
 
             this.focusedDate = this.focusedDate.subtract(1, 'day')
         },
 
         focusPreviousWeek: function () {
-            this.focusedDate ??= dayjs().tz(timezone)
+            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
 
             this.focusedDate = this.focusedDate.subtract(1, 'week')
         },
 
         focusNextDay: function () {
-            this.focusedDate ??= dayjs().tz(timezone)
+            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
 
             this.focusedDate = this.focusedDate.add(1, 'day')
         },
 
         focusNextWeek: function () {
-            this.focusedDate ??= dayjs().tz(timezone)
+            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
 
             this.focusedDate = this.focusedDate.add(1, 'week')
         },
@@ -428,7 +427,7 @@ export default function jalaliDateTimePickerFormComponent({
                 this.setFocusedDay(day)
             }
 
-            this.focusedDate ??= dayjs().tz(timezone)
+            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
 
             this.setState(this.focusedDate)
 
@@ -454,7 +453,7 @@ export default function jalaliDateTimePickerFormComponent({
         },
 
         setupDaysGrid: function () {
-            this.focusedDate ??= dayjs().tz(timezone)
+            this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
 
             this.emptyDaysInFocusedMonth = Array.from(
                 {
@@ -474,9 +473,7 @@ export default function jalaliDateTimePickerFormComponent({
         },
 
         setFocusedDay: function (day) {
-            this.focusedDate = (
-                this.focusedDate ?? dayjs().tz(timezone)
-            ).date(day)
+            this.focusedDate = dayjs().toCalendarSystem("persian").year(this.focusedDate.year()).month(this.focusedDate.month()).date(day);
         },
 
         setState: function (date) {
