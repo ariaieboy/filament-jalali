@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Note: Do not change the order of the translation keys if you want to
  * change the start of the week use the `firstDayOfWeek()`
