@@ -1,6 +1,7 @@
 {
     "dependencies": {
         "@calidy/dayjs-calendarsystems": "^1.11.3",
+        "@zoomit/dayjs-jalali-plugin": "^0.1.11",
         "dayjs": "^1.11.2"
     },
     "scripts": {
@@ -9,7 +10,7 @@
         "watch": "node bin/build.js --dev"
     },
     "devDependencies": {
-        "esbuild": "^0.24.0"
+        "esbuild": "^0.25"
     },
     "type": "module"
 }
