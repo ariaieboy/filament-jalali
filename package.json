@@ -9,7 +9,7 @@
         "watch": "node bin/build.js --dev"
     },
     "devDependencies": {
-        "esbuild": "^0.24.0"
+        "esbuild": "^0.25"
     },
     "type": "module"
 }
