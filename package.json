@@ -1,7 +1,6 @@
 {
     "dependencies": {
         "@calidy/dayjs-calendarsystems": "^1.11.3",
-        "@zoomit/dayjs-jalali-plugin": "^0.1.11",
         "dayjs": "^1.11.2"
     },
     "scripts": {

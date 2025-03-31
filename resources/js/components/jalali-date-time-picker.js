@@ -415,8 +415,7 @@ export default function jalaliDateTimePickerFormComponent({
                     this.getSelectedDate() ??
                     this.getMinDate() ??
                     dayjs().tz(timezone).toCalendarSystem("persian")
-                this.focusedMonth = this.focusedDate.month();
-                this.focusedYear = this.focusedDate.year();
+
                 this.setupDaysGrid()
             }
 
