@@ -5,13 +5,13 @@
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/ariaieboy/filament-jalali/php-cs-fixer.yml?label=styling)
 [![Total Downloads](https://img.shields.io/packagist/dt/ariaieboy/filament-jalali.svg?style=flat-square)](https://packagist.org/packages/ariaieboy/filament-jalali)
 
-This package adds Jalali/Shamsi support to filament v3.
+This package adds Jalali/Shamsi support to filament v4 for filament v3 check branch [v1](https://github.com/ariaieboy/filament-jalali/tree/v1).
 
 We have Jalali/Shamsi support for `DatePicker`,`DateTimePicker`,`TextColumn`, `TextEntry` and `DateConstraint`.
 
 
 It's a replacement for [ariaieboy/filament-jalali-datetime](https://github.com/ariaieboy/filament-jalali-datetime) and [ariaieboy/filament-jalali-datetimepicker](https://github.com/ariaieboy/filament-jalali-datetimepicker).
-For Upgaring guide check [here](README.md#upgrading)
+For Upgrade guide check [here](README.md#upgrade)
 
 ## Installation
 
@@ -74,7 +74,19 @@ For more information check the default [DateConstraint Docs](https://filamentphp
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Upgrading
+## Upgrade
+
+### from `v1`
+
+If you are using the V1 of the `ariaieboy/filament-jalali` you need to change the package version in your composer.json to
+```json
+{
+    "require": {
+        "ariaieboy/filament-jalali": "^2.0"
+    }
+}
+```
+Then run `composer update` command.
 
 ### from `ariaieboy/filament-jalali-datetimepicker`
 
