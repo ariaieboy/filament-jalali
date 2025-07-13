@@ -1,10 +1,15 @@
 @php
+    use Filament\Support\Facades\FilamentView;
+
     $datalistOptions = $getDatalistOptions();
     $extraAlpineAttributes = $getExtraAlpineAttributes();
+    $hasTime = $hasTime();
     $id = $getId();
     $isDisabled = $isDisabled();
     $isPrefixInline = $isPrefixInline();
     $isSuffixInline = $isSuffixInline();
+    $maxDate = $getMaxDate();
+    $minDate = $getMinDate();
     $prefixActions = $getPrefixActions();
     $prefixIcon = $getPrefixIcon();
     $prefixLabel = $getPrefixLabel();
@@ -12,10 +17,10 @@
     $suffixIcon = $getSuffixIcon();
     $suffixLabel = $getSuffixLabel();
     $statePath = $getStatePath();
+    $disabledDates = $getDisabledDates();
     $months = trans('filament-jalali-datetimepicker::months');
 $dayLabels = trans('filament-jalali-datetimepicker::days.long');
 $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
-
 @endphp
 
 <x-dynamic-component
@@ -39,21 +44,32 @@ $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
             :attributes="\Filament\Support\prepare_inherited_attributes($getExtraAttributeBag())"
     >
         <div
-                x-ignore
-                ax-load
-                ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('jalali-datetime-picker',package: "ariaieboy/jalali") }}"
+                @if (FilamentView::hasSpaMode())
+                    {{-- format-ignore-start --}}x-load="visible || event (ax-modal-opened)"{{-- format-ignore-end --}}
+                @else
+                    x-load
+                @endif
+                x-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('jalali-datetime-picker',package: "ariaieboy/jalali") }}"
                 x-data="jalaliDateTimePickerFormComponent({
                             displayFormat:
                                 '{{ convert_date_format($getDisplayFormat())->to('day.js') }}',
                             firstDayOfWeek: {{ $getFirstDayOfWeek() }},
                             isAutofocused: @js($isAutofocused()),
-                            locale: @js(app()->getLocale()),
+                            locale: @js($getLocale()),
                             shouldCloseOnDateSelection: @js($shouldCloseOnDateSelection()),
-                            state: $wire.{{ $applyStateBindingModifiers("entangle('{$statePath}')") }},
+                            state: $wire.{{ $applyStateBindingModifiers("\$entangle('{$statePath}')") }},
                             months:@js($months),
                             dayLabel:@js($dayLabels),
                             dayShortLabel:@js($dayShortLabels)
                         })"
+                wire:ignore
+                wire:key="{{ $this->getId() }}.{{ $statePath }}.{{ $field::class }}.{{
+                    substr(md5(serialize([
+                        'disabledDates' => $disabledDates,
+                        'maxDate' => $maxDate,
+                        'minDate' => $minDate,
+                    ])), 0, 64)
+                }}"
                 x-on:keydown.esc="isOpen() && $event.stopPropagation()"
                 {{
                     $attributes
@@ -62,22 +78,14 @@ $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
                         ->class(['fi-fo-date-time-picker'])
                 }}
         >
-            <input
-                    x-ref="maxDate"
-                    type="hidden"
-                    value="{{ $getMaxDate() }}"
-            />
+            <input x-ref="maxDate" type="hidden" value="{{ $maxDate }}" />
 
-            <input
-                    x-ref="minDate"
-                    type="hidden"
-                    value="{{ $getMinDate() }}"
-            />
+            <input x-ref="minDate" type="hidden" value="{{ $minDate }}" />
 
             <input
                     x-ref="disabledDates"
                     type="hidden"
-                    value="{{ json_encode($getDisabledDates()) }}"
+                    value="{{ json_encode($disabledDates) }}"
             />
 
             <button
@@ -98,7 +106,7 @@ $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
                     aria-label="{{ $getPlaceholder() }}"
                     type="button"
                     tabindex="-1"
-                    @disabled($isDisabled)
+                    @disabled($isDisabled || $isReadOnly())
                     {{
                         $getExtraTriggerAttributeBag()->class([
                             'w-full',
@@ -111,7 +119,6 @@ $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
                         placeholder="{{ $getPlaceholder() }}"
                         wire:key="{{ $this->getId() }}.{{ $statePath }}.{{ $field::class }}.display-text"
                         x-model="displayText"
-                        dir="ltr"
                         @if ($id = $getId()) id="{{ $id }}" @endif
                         @class([
                             'fi-fo-date-time-picker-display-text-input w-full border-none bg-transparent px-3 py-1.5 text-base text-gray-950 outline-none transition duration-75 placeholder:text-gray-400 focus:ring-0 disabled:text-gray-500 disabled:[-webkit-text-fill-color:theme(colors.gray.500)] dark:text-white dark:placeholder:text-gray-500 dark:disabled:text-gray-400 dark:disabled:[-webkit-text-fill-color:theme(colors.gray.400)] sm:text-sm sm:leading-6',
@@ -122,12 +129,12 @@ $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
             <div
                     x-ref="panel"
                     x-cloak
-                    x-float.placement.bottom-start.offset.autoPlacement.shift="{ offset: 8 }"
+                    x-float.placement.bottom-start.offset.flip.shift="{ offset: 8 }"
                     wire:ignore
                     wire:key="{{ $this->getId() }}.{{ $statePath }}.{{ $field::class }}.panel"
                     @class([
-                       'fi-fo-date-time-picker-panel absolute z-10 rounded-lg bg-white p-4 shadow-lg ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10',
-                   ])
+                        'fi-fo-date-time-picker-panel absolute z-10 rounded-lg bg-white p-4 shadow-lg ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10',
+                    ])
             >
                 <div class="grid gap-y-3">
                     @if ($hasDate())
@@ -168,7 +175,7 @@ $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
 
                         <div
                                 role="grid"
-                                class="grid grid-cols-7 gap-1"
+                                class="grid grid-cols-[repeat(7,minmax(theme(spacing.7),1fr))] gap-1"
                         >
                             <template
                                     x-for="day in emptyDaysInFocusedMonth"
@@ -204,67 +211,65 @@ $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
                                             'pointer-events-none': dayIsDisabled(day),
                                             'opacity-50': dayIsDisabled(day),
                                         }"
-
                                         class="rounded-full text-center text-sm leading-loose transition duration-75"
                                 ></div>
                             </template>
                         </div>
+                    @endif
 
-                        @if ($hasTime())
-                            <div
-                                    class="flex items-center justify-center rtl:flex-row-reverse"
+                    @if ($hasTime)
+                        <div
+                                class="flex items-center justify-center rtl:flex-row-reverse"
+                        >
+                            <input
+                                    max="23"
+                                    min="0"
+                                    step="{{ $getHoursStep() }}"
+                                    type="number"
+                                    inputmode="numeric"
+                                    x-model.debounce="hour"
+                                    class="me-1 w-10 border-none bg-transparent p-0 text-center text-sm text-gray-950 focus:ring-0 dark:text-white"
+                            />
+
+                            <span
+                                    class="text-sm font-medium text-gray-500 dark:text-gray-400"
                             >
-                                <input
-                                        max="23"
-                                        min="0"
-                                        step="{{ $getHoursStep() }}"
-                                        type="number"
-                                        inputmode="numeric"
-                                        x-model.debounce="hour"
-                                        class="me-1 w-10 border-none bg-transparent p-0 text-center text-sm text-gray-950 focus:ring-0 dark:text-white"
-                                />
+                                    :
+                                </span>
 
+                            <input
+                                    max="59"
+                                    min="0"
+                                    step="{{ $getMinutesStep() }}"
+                                    type="number"
+                                    inputmode="numeric"
+                                    x-model.debounce="minute"
+                                    class="me-1 w-10 border-none bg-transparent p-0 text-center text-sm text-gray-950 focus:ring-0 dark:text-white"
+                            />
+
+                            @if ($hasSeconds())
                                 <span
                                         class="text-sm font-medium text-gray-500 dark:text-gray-400"
                                 >
-                                    :
-                                </span>
+                                        :
+                                    </span>
 
                                 <input
                                         max="59"
                                         min="0"
-                                        step="{{ $getMinutesStep() }}"
+                                        step="{{ $getSecondsStep() }}"
                                         type="number"
                                         inputmode="numeric"
-                                        x-model.debounce="minute"
+                                        x-model.debounce="second"
                                         class="me-1 w-10 border-none bg-transparent p-0 text-center text-sm text-gray-950 focus:ring-0 dark:text-white"
                                 />
-
-                                @if ($hasSeconds())
-                                    <span
-                                            class="text-sm font-medium text-gray-500 dark:text-gray-400"
-                                    >
-                                        :
-                                    </span>
-
-                                    <input
-                                            max="59"
-                                            min="0"
-                                            step="{{ $getSecondsStep() }}"
-                                            type="number"
-                                            inputmode="numeric"
-                                            x-model.debounce="second"
-                                            class="me-1 w-10 border-none bg-transparent p-0 text-center text-sm text-gray-950 focus:ring-0 dark:text-white"
-                                    />
-                                @endif
-                            </div>
-                        @endif
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
-        @endif
     </x-filament::input.wrapper>
-
     @if ($datalistOptions)
         <datalist id="{{ $id }}-list">
             @foreach ($datalistOptions as $option)
