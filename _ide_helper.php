@@ -10,6 +10,14 @@ namespace Filament\Forms\Components {
         {
             return $this;
         }
+
+        /**
+         * @source FilamentJalaliServiceProvider.php:50
+         */
+        public function hasToday(bool $hasToday = true): self
+        {
+            return $this;
+        }
     }
 
     class DateTimePicker
@@ -18,6 +26,13 @@ namespace Filament\Forms\Components {
          * @source FilamentJalaliServiceProvider.php:25
          */
         public function jalali(bool $weekdaysShort = false): self
+        {
+            return $this;
+        }
+        /**
+         * @source FilamentJalaliServiceProvider.php:56
+         */
+        public function hasToday(bool $hasToday = true): self
         {
             return $this;
         }

@@ -12,8 +12,8 @@ class IsJalaliAfterOperator extends \Filament\Tables\Filters\QueryBuilder\Constr
     {
         return __(
             $this->isInverse() ?
-                'filament-tables::filters/query-builder.operators.date.is_after.summary.inverse' :
-                'filament-tables::filters/query-builder.operators.date.is_after.summary.direct',
+                'filament-query-builder::query-builder.operators.date.is_after.summary.inverse' :
+                'filament-query-builder::query-builder.operators.date.is_after.summary.direct',
             [
                 'attribute' => $this->getConstraint()->getAttributeLabel(),
                 'date' => \Ariaieboy\Jalali\Jalali::fromCarbon(Carbon::parse($this->getSettings()['date']))->toFormattedDateString(),
@@ -29,8 +29,9 @@ class IsJalaliAfterOperator extends \Filament\Tables\Filters\QueryBuilder\Constr
         return [
             DatePicker::make('date')
                 ->jalali()
+                ->hasToday()
                 ->reactive()
-                ->label(__('filament-tables::filters/query-builder.operators.date.form.date.label'))
+                ->label(__('filament-query-builder::query-builder.operators.date.form.date.label'))
                 ->required(),
         ];
     }

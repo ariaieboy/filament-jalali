@@ -29,9 +29,9 @@
     $step = $getStep();
     $type = $getType();
     $livewireKey = $getLivewireKey();
-    $months = trans('filament-jalali-datetimepicker::months');
-    $dayLabels = trans('filament-jalali-datetimepicker::days.long');
-    $dayShortLabels = trans('filament-jalali-datetimepicker::days.short');
+    $months = trans('filament-jalali::months');
+    $dayLabels = trans('filament-jalali::days.long');
+    $dayShortLabels = trans('filament-jalali::days.short');
 @endphp
 
 <x-dynamic-component
@@ -162,6 +162,11 @@
                                 x-model.debounce="focusedYear"
                                 class="fi-fo-date-time-picker-year-input"
                         />
+                        @if($has_today)
+                            <x-filament::button size="xs" x-on:click="today">
+                                {{ trans('filament-jalali::days.today') }}
+                            </x-filament::button>
+                        @endif
                     </div>
 
                     <div class="fi-fo-date-time-picker-calendar-header">
