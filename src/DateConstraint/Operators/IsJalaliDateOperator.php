@@ -14,8 +14,8 @@ class IsJalaliDateOperator extends IsDateOperator
     {
         return __(
             $this->isInverse() ?
-                'filament-tables::filters/query-builder.operators.date.is_date.summary.inverse' :
-                'filament-tables::filters/query-builder.operators.date.is_date.summary.direct',
+                'filament-query-builder::query-builder.operators.date.is_date.summary.inverse' :
+                'filament-query-builder::query-builder.operators.date.is_date.summary.direct',
             [
                 'attribute' => $this->getConstraint()->getAttributeLabel(),
                 'date' => Jalali::fromCarbon(Carbon::parse($this->getSettings()['date']))->toFormattedDateString(),
@@ -32,7 +32,7 @@ class IsJalaliDateOperator extends IsDateOperator
             DatePicker::make('date')
                 ->jalali()
                 ->reactive()
-                ->label(__('filament-tables::filters/query-builder.operators.date.form.date.label'))
+                ->label(__('filament-query-builder::query-builder.operators.date.form.date.label'))
                 ->required(),
         ];
     }
