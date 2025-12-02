@@ -24,5 +24,5 @@ return [
         '6' => 'Saturday',
         '7' => 'Sunday',
     ],
-    'today'=>'Today'
+    'today' => 'Today',
 ];
