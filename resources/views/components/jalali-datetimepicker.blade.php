@@ -163,7 +163,7 @@
                                 class="fi-fo-date-time-picker-year-input"
                         />
                         @if($has_today)
-                            <x-filament::button size="xs">
+                            <x-filament::button size="xs" x-on:click="today">
                                 {{ trans('filament-jalali::days.today') }}
                             </x-filament::button>
                         @endif
