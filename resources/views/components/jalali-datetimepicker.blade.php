@@ -162,6 +162,9 @@
                                 x-model.debounce="focusedYear"
                                 class="fi-fo-date-time-picker-year-input"
                         />
+                        <x-filament::button>
+                            {{ trans('filament-jalali-datetimepicker::days.today') }}
+                        </x-filament::button>
                     </div>
 
                     <div class="fi-fo-date-time-picker-calendar-header">
