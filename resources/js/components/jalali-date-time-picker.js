@@ -255,6 +255,31 @@ export default function jalaliDateTimePickerFormComponent({
             })
         },
 
+        today: function(){
+            this.focusedDate = dayjs().tz(timezone).toCalendarSystem("persian")
+
+            let date = dayjs().tz(timezone).toCalendarSystem("persian")
+
+            if (
+                this.getMaxDate() !== null &&
+                date.isAfter(this.getMaxDate())
+            ) {
+                date = null
+            } else if (
+                this.getMinDate() !== null &&
+                date.isBefore(this.getMinDate())
+            ) {
+                date = null
+            }
+
+            this.hour = date?.hour() ?? 0
+            this.minute = date?.minute() ?? 0
+            this.second = date?.second() ?? 0
+
+            this.setDisplayText()
+            this.setMonths()
+            this.setDayLabels()
+        },
         clearState: function () {
             this.isClearingState = true
 
