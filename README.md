@@ -29,6 +29,7 @@ use Filament\Forms\Components\DateTimePicker;
 
 DatePicker::make('birth_date')->jalali();
 DateTimePicker::make('birth_date')->jalali(weekdaysShort: true);
+DateTimePicker::make('birth_date')->jalali(weekdaysShort: true)->hasToday(); // add a today button that when use press on it the date will be set to today
 ```
 For more information check the default [DateTimePicker Docs](https://filamentphp.com/docs/4.x/forms/fields#date-time-picker)
 ```php
