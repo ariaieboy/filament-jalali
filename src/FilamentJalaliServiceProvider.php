@@ -35,7 +35,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             $this->extraAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true);
             $this->firstDayOfWeek(6);
             $this->displayFormat('Y/m/d');
-
+            $this->viewData(['has_today' => false]);
             return $this;
         });
         DateTimePicker::macro('jalali', function (bool $weekdaysShort = false) {
@@ -44,7 +44,18 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             $this->extraAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true);
             $this->firstDayOfWeek(6);
             $this->displayFormat('Y/m/d H:i:s');
+            $this->viewData(['has_today' => false]);
+            return $this;
+        });
+        DatePicker::macro('hasToday',function(bool $hasToday=true){
+            /** @var DatePicker $this */
 
+            $this->viewData(['has_today' => $hasToday]);
+            return $this;
+        });
+        DateTimePicker::macro('hasToday',function(bool $hasToday=true){
+            /** @var DateTimePicker $this */
+            $this->viewData(['has_today' => $hasToday]);
             return $this;
         });
         // Text based Columns macros
