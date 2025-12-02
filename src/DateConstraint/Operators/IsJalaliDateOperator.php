@@ -31,6 +31,7 @@ class IsJalaliDateOperator extends IsDateOperator
         return [
             DatePicker::make('date')
                 ->jalali()
+                ->hasToday()
                 ->reactive()
                 ->label(__('filament-query-builder::query-builder.operators.date.form.date.label'))
                 ->required(),

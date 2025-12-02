@@ -32,6 +32,7 @@ class IsJalaliBeforeOperator extends IsBeforeOperator
             DatePicker::make('date')
                 ->jalali()
                 ->reactive()
+                ->hasToday()
                 ->label(__('filament-query-builder::query-builder.operators.date.form.date.label'))
                 ->required(),
         ];
