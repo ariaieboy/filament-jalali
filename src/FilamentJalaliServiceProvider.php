@@ -32,7 +32,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         DatePicker::macro('jalali', function (bool $weekdaysShort = false) {
             /** @var DatePicker $this */
             $this->view = 'filament-jalali::components.jalali-datetimepicker';
-            $this->extraAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true);
+            $this->extraAlpineAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true);
             $this->firstDayOfWeek(6);
             $this->displayFormat('Y/m/d');
             $this->viewData(['has_today' => false]);
@@ -42,7 +42,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
         DateTimePicker::macro('jalali', function (bool $weekdaysShort = false) {
             /** @var DateTimePicker $this */
             $this->view = 'filament-jalali::components.jalali-datetimepicker';
-            $this->extraAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true);
+            $this->extraAlpineAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true);
             $this->firstDayOfWeek(6);
             $this->displayFormat('Y/m/d H:i:s');
             $this->viewData(['has_today' => false]);
