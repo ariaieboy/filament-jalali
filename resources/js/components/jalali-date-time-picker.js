@@ -394,13 +394,13 @@ export default function jalaliDateTimePickerFormComponent({
                 }
             }
 
-            if (firstDayOfWeek === 0) {
+            if (firstDayOfWeek === 1) {
                 return labels
             }
 
             return [
-                ...labels.slice(firstDayOfWeek),
-                ...labels.slice(0, firstDayOfWeek),
+                ...labels.slice(firstDayOfWeek-1),
+                ...labels.slice(0, firstDayOfWeek-1),
             ]
         },
 
