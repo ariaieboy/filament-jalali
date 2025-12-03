@@ -162,7 +162,7 @@
                                 x-model.debounce="focusedYear"
                                 class="fi-fo-date-time-picker-year-input"
                         />
-                        @if($has_today)
+                        @if($has_today??false)
                             <x-filament::button size="xs" x-on:click="today">
                                 {{ trans('filament-jalali::days.today') }}
                             </x-filament::button>

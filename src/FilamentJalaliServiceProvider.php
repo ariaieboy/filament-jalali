@@ -35,7 +35,6 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             $this->extraAlpineAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true);
             $this->firstDayOfWeek(6);
             $this->displayFormat('Y/m/d');
-            $this->viewData(['has_today' => false]);
 
             return $this;
         });
@@ -45,7 +44,6 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             $this->extraAlpineAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true);
             $this->firstDayOfWeek(6);
             $this->displayFormat('Y/m/d H:i:s');
-            $this->viewData(['has_today' => false]);
 
             return $this;
         });
