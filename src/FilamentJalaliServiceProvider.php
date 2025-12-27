@@ -29,21 +29,27 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             AlpineComponent::make('jalali-datetime-picker', __DIR__.'/../resources/dist/js/jalali-date-time-picker.js'),
         ], package: 'ariaieboy/jalali');
         // date time picker macros
-        DatePicker::macro('jalali', function (bool $weekdaysShort = false) {
+        DatePicker::macro('jalali', function (bool $weekdaysShort = false, ?string $monthLocale = null) {
             /** @var DatePicker $this */
             $this->view = 'filament-jalali::components.jalali-datetimepicker';
             $this->extraAlpineAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true);
             $this->firstDayOfWeek(6);
             $this->displayFormat('Y/m/d');
+            $this->viewData([
+                'jalali_month_locale' => $monthLocale ?? config('filament-jalali.month_locale', 'iran'),
+            ]);
 
             return $this;
         });
-        DateTimePicker::macro('jalali', function (bool $weekdaysShort = false) {
+        DateTimePicker::macro('jalali', function (bool $weekdaysShort = false, ?string $monthLocale = null) {
             /** @var DateTimePicker $this */
             $this->view = 'filament-jalali::components.jalali-datetimepicker';
             $this->extraAlpineAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true);
             $this->firstDayOfWeek(6);
             $this->displayFormat('Y/m/d H:i:s');
+            $this->viewData([
+                'jalali_month_locale' => $monthLocale ?? config('filament-jalali.month_locale', 'iran'),
+            ]);
 
             return $this;
         });

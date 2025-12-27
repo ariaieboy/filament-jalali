@@ -29,7 +29,13 @@
     $step = $getStep();
     $type = $getType();
     $livewireKey = $getLivewireKey();
-    $months = trans('filament-jalali::months');
+    $monthLocale = $jalali_month_locale ?? config('filament-jalali.month_locale', 'iran');
+    $months = trans("filament-jalali::months.{$monthLocale}");
+    if (! is_array($months)) {
+        $months = trans('filament-jalali::months.iran');
+    }
+
+    $months = is_array($months) ? array_values($months) : [];
     $dayLabels = trans('filament-jalali::days.long');
     $dayShortLabels = trans('filament-jalali::days.short');
 @endphp
