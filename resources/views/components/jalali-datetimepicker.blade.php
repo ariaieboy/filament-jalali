@@ -29,10 +29,18 @@
     $step = $getStep();
     $type = $getType();
     $livewireKey = $getLivewireKey();
-    $monthLocale = $jalali_month_locale ?? config('filament-jalali.month_locale', 'iran');
-    $months = trans("filament-jalali::months.{$monthLocale}");
+
+    $monthLocale = $jalali_month_locale ?? config('filament-jalali.month_locale');
+    $monthLocale = match ($monthLocale) {
+        'iran' => 'fa',
+        'afghanistan_dari' => 'fa_AF',
+        'afghanistan_pashto' => 'ps',
+        default => $monthLocale,
+    };
+
+    $months = trans('filament-jalali::months', locale: $monthLocale);
     if (! is_array($months)) {
-        $months = trans('filament-jalali::months.iran');
+        $months = trans('filament-jalali::months', locale: config('app.fallback_locale', 'en'));
     }
 
     $months = is_array($months) ? array_values($months) : [];

@@ -32,14 +32,15 @@ DateTimePicker::make('birth_date')->jalali(weekdaysShort: true);
 DateTimePicker::make('birth_date')->jalali(weekdaysShort: true)->hasToday(); // add a today button that when use press on it the date will be set to today
 ```
 
-Month names default to the Iranian Persian set. You can switch them to the Afghanistan variants via the `monthLocale` argument (`iran`, `afghanistan_dari`, `afghanistan_pashto`):
+Month names are loaded from the current Laravel locale's `filament-jalali::months` translation file.
+You can override the locale used for month names via the `monthLocale` argument (e.g. `fa`, `fa_AF`, `ps`, `en`):
 
 ```php
-DatePicker::make('birth_date')->jalali(monthLocale: 'afghanistan_dari');
-DatePicker::make('birth_date')->jalali(monthLocale: 'afghanistan_pashto');
+DatePicker::make('birth_date')->jalali(monthLocale: 'fa_AF'); // Afghanistan Dari
+DatePicker::make('birth_date')->jalali(monthLocale: 'ps');    // Afghanistan Pashto
 ```
 
-To change the default for the whole app, set the `month_locale` key in `config/filament-jalali.php`.
+To change the default for the whole app, set the `month_locale` key in `config/filament-jalali.php` (use `null` to use the current app locale).
 For more information check the default [DateTimePicker Docs](https://filamentphp.com/docs/4.x/forms/fields#date-time-picker)
 ```php
 use Filament\Tables\Columns\TextColumn;
