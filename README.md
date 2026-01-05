@@ -72,6 +72,19 @@ For more information check the default [DateConstraint Docs](https://filamentphp
 
 > Fill free to open a PR that adds `IsJalaliMonthOperator` if you have an algorithm to convert jalali/shamsi month to georgian month.
 
+## Localization
+We support localization for Persian (Farsi), English, Pashto, Dari out of the box. To enable it, you need to set your application's locale to `fa`,`en`,`fa_AF`,`ps` in the `config/app.php` file:
+
+```php
+'locale' => 'fa' // or 'en' for english, 'fa_AF' dari, 'ps' for pashto
+```
+
+You can publish the localization files to customize them:
+
+```bash
+php artisan vendor:publish --tag="filament-jalali-translations"
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
