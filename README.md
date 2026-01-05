@@ -31,6 +31,7 @@ DatePicker::make('birth_date')->jalali();
 DateTimePicker::make('birth_date')->jalali(weekdaysShort: true);
 DateTimePicker::make('birth_date')->jalali(weekdaysShort: true)->hasToday(); // add a today button that when use press on it the date will be set to today
 ```
+
 For more information check the default [DateTimePicker Docs](https://filamentphp.com/docs/4.x/forms/fields#date-time-picker)
 ```php
 use Filament\Tables\Columns\TextColumn;
@@ -70,6 +71,19 @@ For more information check the default [DateConstraint Docs](https://filamentphp
 > We don't support `IsJalaliMonthOperator` since there is not and efficient way to query georgian month according to the jalali/shamsi month.
 
 > Fill free to open a PR that adds `IsJalaliMonthOperator` if you have an algorithm to convert jalali/shamsi month to georgian month.
+
+## Localization
+We support localization for Persian (Farsi), English, Pashto, Dari out of the box. To enable it, you need to set your application's locale to `fa`,`en`,`fa_AF`,`ps` in the `config/app.php` file:
+
+```php
+'locale' => 'fa' // or 'en' for english, 'fa_AF' dari, 'ps' for pashto
+```
+
+You can publish the localization files to customize them:
+
+```bash
+php artisan vendor:publish --tag="filament-jalali-translations"
+```
 
 ## Changelog
 

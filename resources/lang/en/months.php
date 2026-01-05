@@ -3,14 +3,15 @@
 return [
     '0' => 'Farvardin',
     '1' => 'Ordibehesht',
-    '2' => 'Khordaad',
+    '2' => 'Khordad',
     '3' => 'Tir',
-    '4' => 'Mordaad',
+    '4' => 'Mordad',
     '5' => 'Shahrivar',
     '6' => 'Mehr',
-    '7' => 'Aabaan',
-    '8' => 'Aazar',
+    '7' => 'Aban',
+    '8' => 'Azar',
     '9' => 'Dey',
     '10' => 'Bahman',
-    '11' => 'Esfand22',
+    '11' => 'Esfand',
 ];
+
