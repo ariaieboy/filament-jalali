@@ -91,6 +91,18 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Upgrade
 
+### from `v2`
+
+If you are using the V2 of the `ariaieboy/filament-jalali` you need to change the package version in your composer.json to
+```json
+{
+    "require": {
+        "ariaieboy/filament-jalali": "^3.0"
+    }
+}
+```
+Then run `composer update` command.
+
 ### from `v1`
 
 If you are using the V1 of the `ariaieboy/filament-jalali` you need to change the package version in your composer.json to
