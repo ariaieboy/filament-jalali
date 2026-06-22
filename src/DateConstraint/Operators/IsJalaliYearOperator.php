@@ -4,10 +4,11 @@ namespace Ariaieboy\FilamentJalali\DateConstraint\Operators;
 
 use Ariaieboy\Jalali\Jalali;
 use Filament\Tables\Filters\QueryBuilder\Constraints\DateConstraint\Operators\IsYearOperator;
+use Illuminate\Database\Eloquent\Builder;
 
 class IsJalaliYearOperator extends IsYearOperator
 {
-    public function apply(\Illuminate\Database\Eloquent\Builder $query, string $qualifiedColumn): \Illuminate\Database\Eloquent\Builder
+    public function apply(Builder $query, string $qualifiedColumn): Builder
     {
         $year = $this->getSettings()['year'];
         $start = new Jalali($year, 1, 1);

@@ -6,6 +6,7 @@ use Ariaieboy\Jalali\Jalali;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Filters\QueryBuilder\Constraints\DateConstraint\Operators\IsDateOperator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 
 class IsJalaliDateOperator extends IsDateOperator
@@ -38,7 +39,7 @@ class IsJalaliDateOperator extends IsDateOperator
         ];
     }
 
-    public function apply(\Illuminate\Database\Eloquent\Builder $query, string $qualifiedColumn): \Illuminate\Database\Eloquent\Builder
+    public function apply(Builder $query, string $qualifiedColumn): Builder
     {
         $date = $this->getSettings()['date'];
 
