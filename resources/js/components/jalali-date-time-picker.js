@@ -252,8 +252,16 @@ export default function jalaliDateTimePickerFormComponent({
             })
         },
 
-        today: function(){
-            this.focusedDate = dayjs().tz(timezone).toCalendarSystem("persian");
+        today: function () {
+            const today = dayjs().tz(timezone).toCalendarSystem("persian")
+
+            this.focusedDate = today
+
+            if (this.dateIsDisabled(today)) {
+                return
+            }
+
+            this.selectDate(today.date())
         },
         clearState: function () {
             this.isClearingState = true
