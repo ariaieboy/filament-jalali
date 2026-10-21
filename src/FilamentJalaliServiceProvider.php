@@ -29,7 +29,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
             AlpineComponent::make('jalali-datetime-picker', __DIR__.'/../resources/dist/js/jalali-date-time-picker.js'),
         ], package: 'ariaieboy/jalali');
         // date time picker macros
-        DatePicker::macro('jalali', function (bool $weekdaysShort = false) {
+        DatePicker::macro('jalali', function (bool $weekdaysShort = true) {
             /** @var DatePicker $this */
             $this->view = 'filament-jalali::components.jalali-datetimepicker';
             $this->extraAlpineAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true);
@@ -38,7 +38,7 @@ class FilamentJalaliServiceProvider extends PackageServiceProvider
 
             return $this;
         });
-        DateTimePicker::macro('jalali', function (bool $weekdaysShort = false) {
+        DateTimePicker::macro('jalali', function (bool $weekdaysShort = true) {
             /** @var DateTimePicker $this */
             $this->view = 'filament-jalali::components.jalali-datetimepicker';
             $this->extraAlpineAttributes(['data-weekdays-short' => ($weekdaysShort ? 'short' : 'long')], true);

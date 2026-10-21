@@ -169,47 +169,54 @@
                         @endif
                     </div>
 
-                    <div class="fi-fo-date-time-picker-calendar-header">
-                        <template
-                                x-for="(day, index) in dayLabels"
-                                x-bind:key="index"
-                        >
-                            <div
-                                    x-text="day"
-                                    class="fi-fo-date-time-picker-calendar-header-day"
-                            ></div>
-                        </template>
-                    </div>
-
                     <div
                             role="grid"
                             class="fi-fo-date-time-picker-calendar"
                     >
-                        <template
-                                x-for="day in emptyDaysInFocusedMonth"
-                                x-bind:key="day"
+                        <div
+                                role="row"
+                                class="fi-fo-date-time-picker-calendar-header"
                         >
-                            <div></div>
-                        </template>
+                            <template
+                                    x-for="(day, index) in dayLabels"
+                                    x-bind:key="index"
+                            >
+                                <div
+                                        role="columnheader"
+                                        x-text="day"
+                                        class="fi-fo-date-time-picker-calendar-header-day"
+                                ></div>
+                            </template>
+                        </div>
 
                         <template
-                                x-for="day in daysInFocusedMonth"
-                                x-bind:key="day"
+                                x-for="(week, weekIndex) in weeksInFocusedMonth"
+                                x-bind:key="weekIndex"
                         >
                             <div
-                                    x-text="day"
-                                    x-on:click="dayIsDisabled(day) || selectDate(day)"
-                                    x-on:mouseenter="setFocusedDay(day)"
-                                    role="option"
-                                    x-bind:aria-selected="focusedDate.date() === day"
-                                    x-bind:class="{
-                                        'fi-fo-date-time-picker-calendar-day-today': dayIsToday(day),
-                                        'fi-focused': focusedDate.date() === day,
-                                        'fi-selected': dayIsSelected(day),
-                                        'fi-disabled': dayIsDisabled(day),
-                                    }"
-                                    class="fi-fo-date-time-picker-calendar-day"
-                            ></div>
+                                    role="row"
+                                    class="fi-fo-date-time-picker-calendar-week"
+                            >
+                                <template
+                                        x-for="(day, dayIndex) in week"
+                                        x-bind:key="day ?? ('empty-' + dayIndex)"
+                                >
+                                    <div
+                                            role="gridcell"
+                                            x-text="day"
+                                            x-on:click="day && ! dayIsDisabled(day) && selectDate(day)"
+                                            x-on:mouseenter="day && setFocusedDay(day)"
+                                            x-bind:aria-selected="day ? dayIsSelected(day) : null"
+                                            x-bind:class="{
+                                                'fi-fo-date-time-picker-calendar-day': day,
+                                                'fi-fo-date-time-picker-calendar-day-today': day && dayIsToday(day),
+                                                'fi-focused': day && focusedDate.date() === day,
+                                                'fi-selected': day && dayIsSelected(day),
+                                                'fi-disabled': day && dayIsDisabled(day),
+                                            }"
+                                    ></div>
+                                </template>
+                            </div>
                         </template>
                     </div>
                 @endif
