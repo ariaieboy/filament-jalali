@@ -30,11 +30,7 @@ export default function jalaliDateTimePickerFormComponent({
     const timezone = dayjs.tz.guess()
 
     return {
-        daysInFocusedMonth: [],
-
         displayText: '',
-
-        emptyDaysInFocusedMonth: [],
 
         focusedDate: null,
 
@@ -52,6 +48,7 @@ export default function jalaliDateTimePickerFormComponent({
 
         state,
         months,
+        weeksInFocusedMonth: [],
         dayLabels: [],
         dayLabel,
 
@@ -458,21 +455,25 @@ export default function jalaliDateTimePickerFormComponent({
         setupDaysGrid: function () {
             this.focusedDate ??= dayjs().tz(timezone).toCalendarSystem("persian")
 
-            this.emptyDaysInFocusedMonth = Array.from(
-                {
-                    length: this.focusedDate
-                        .date(8 - firstDayOfWeek)
-                        .day(),
-                },
-                (_, i) => i + 1,
-            )
+            const emptyDaysInFocusedMonth = this.focusedDate
+                .date(8 - firstDayOfWeek)
+                .day()
 
-            this.daysInFocusedMonth = Array.from(
-                {
-                    length: this.focusedDate.daysInMonth(),
-                },
-                (_, i) => i + 1,
-            )
+            const daysInFocusedMonth = [
+                ...Array.from({ length: emptyDaysInFocusedMonth }, () => null),
+                ...Array.from(
+                    {
+                        length: this.focusedDate.daysInMonth(),
+                    },
+                    (_, i) => i + 1,
+                ),
+            ]
+
+            this.weeksInFocusedMonth = []
+
+            for (let i = 0; i < daysInFocusedMonth.length; i += 7) {
+                this.weeksInFocusedMonth.push(daysInFocusedMonth.slice(i, i + 7))
+            }
         },
 
         setFocusedDay: function (day) {
